@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { db } from "../firebase/config";
 import { collection, query, orderBy, onSnapshot, where } from "firebase/firestore";
 
-export const useFetchDocument = (docCollection, search = null, uid = null) => {
+export const useFetchDocuments = (docCollection, search = null, uid = null) => {
 
     const [documents, setDocuments] = useState(null)
     const [error, setError] = useState(null)
@@ -39,9 +39,7 @@ export const useFetchDocument = (docCollection, search = null, uid = null) => {
                             id: doc.id,
                             ...doc.data(),
                         }))
-
                     )
-
                 })
 
                 setLoading(false)
@@ -62,5 +60,5 @@ export const useFetchDocument = (docCollection, search = null, uid = null) => {
         return () => setCancelled(true)
     }, [])
 
-    return documents, loading, error
+    return { documents, loading, error }
 }
