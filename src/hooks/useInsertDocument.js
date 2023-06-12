@@ -41,7 +41,7 @@ export const useInsertDocument = (docCollection) => {
 
     }
 
-    const insertDocument = async(document) => {
+    const insertDocument = async (document) => {
 
         checkCancelBeforeDispatch({
             type: "LOADING",
@@ -70,12 +70,12 @@ export const useInsertDocument = (docCollection) => {
 
         }
 
-        useEffect(() => {
-            return () => setCancelled(true)
-        }, [])
-
-        return { insertDocument, response }
-
     }
+
+    useEffect(() => {
+        return () => setCancelled(true)
+    }, [])
+
+    return { insertDocument, response }
 
 }
