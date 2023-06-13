@@ -7,14 +7,13 @@ import { useAuthValue } from "../../context/AuthContext"
 import { useFetchDocuments } from "../../hooks/useFetchDocuments"
 
 const Dashboard = () => {
-  const {user} = useAuthValue()
+  const { user } = useAuthValue()
   const uid = user.id
 
-  // Posts do usuário
-  const posts = []
+  const { documents: posts, loading } = useFetchDocuments("posts", null, uid)
 
   return (
-    <div>
+    <div className={styles.noposts}>
         <h2>Dashboard</h2>
         <p>Gerencie os seus posts</p>
         {posts && posts.length === 0 ? (
@@ -27,6 +26,8 @@ const Dashboard = () => {
             <p>Tem posts!</p>
           </div>
         )}
+
+        {posts && posts.map((post) => <h3>{post.title}</h3>)}
     </div>
   )
 }
